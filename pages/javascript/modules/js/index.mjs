@@ -1,4 +1,5 @@
-import { fmtMoney, getElById, getElByClass, getElByTag } from "./util.mjs";
+import { fmtMoney } from "./util.mjs";
+import { getElById, getElByClass } from "../../../../common/util.mjs";
 
 window.onload = () => {
   const moenyEl = getElById("money");
@@ -22,4 +23,8 @@ window.onload = () => {
       evaluateEl[0].innerHTML = text;
     }, 500);
   });
+
+  setTimeout(async () => {
+    await import("./zh_cn.mjs");
+  }, 500);
 };

@@ -9,12 +9,3 @@ export function getElByClass(className) {
 export function getElByTag(tag) {
   return document.getElementsByTagName(tag);
 }
-
-export function fmtMoney(val) {
-  const moneyStr = val.toLocaleString("zh", {
-    style: "currency",
-    currency: "CNY",
-  });
-  console.log(moneyStr);
-  return moneyStr;
-}

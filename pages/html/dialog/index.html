@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML dialog 标签</title>
+  </head>
+  <body>
+    <a href="/">首页</a>
+    <h1>HTML dialog 标签</h1>
+
+    <dialog id="dialog">
+      <h2>弹窗标题</h2>
+      <input type="text" name="test" />
+      <p>按ESC可以关闭弹窗，也可以点击“关闭dialog”按钮手动关闭弹窗</p>
+      <button id="closeBtn">关闭dialog</button>
+    </dialog>
+
+    <button id="openBtn">显示dialog</button>
+
+    <style>
+      dialog {
+        width: 400px;
+        height: 220px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+      }
+      dialog::backdrop {
+        background-color: rgba(126, 201, 236, 0.6);
+      }
+    </style>
+
+    <script type="module">
+      import { getElById } from "../../../common/util.mjs";
+
+      (function () {
+        const dialog = getElById("dialog");
+        const openBtn = getElById("openBtn");
+
+        openBtn.addEventListener("click", () => {
+          // 打开dialog，显示遮罩层
+          dialog.showModal();
+          dialog.show();
+        });
+
+        // 给关闭弹窗按钮绑定事件
+        const closeBtn = getElById("closeBtn");
+        closeBtn.addEventListener("click", () => {
+          dialog.close();
+        });
+      })();
+    </script>
+  </body>
+</html>
