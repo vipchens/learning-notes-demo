@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Element - Web Component</title>
+  </head>
+  <body>
+    <a href="/">首页</a>
+    <h1>Custom Element</h1>
+
+    <cat-demo></cat-demo>
+    <cat-demo></cat-demo>
+
+    <template id="cat-template">
+      <style>
+        .wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 200px;
+        }
+
+        .cat {
+          position: absolute;
+          width: 200px;
+          height: 100px;
+          /*   margin: 20px auto; */
+          overflow: hidden;
+          background-color: #fff;
+        }
+        .cat img {
+          width: 100%;
+          position: absolute;
+          left: calc(50% - 100px);
+          top: -50px;
+        }
+
+        .ears {
+          position: absolute;
+        }
+
+        .ear {
+          width: 0;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: 20px solid pink;
+          position: relative;
+        }
+
+        .eLeft {
+          left: -49px;
+          top: -16px;
+          transform: rotate(-48deg);
+        }
+        .eRight {
+          left: 49px;
+          top: -36px;
+          transform: rotate(48deg);
+        }
+
+        .eye {
+          position: absolute;
+          width: 28px;
+          height: 28px;
+          background-color: #071;
+          box-shadow: 5px 5px 6px #0f2 inset;
+          border-radius: 50%;
+          border: 1px solid #000;
+          top: 41px;
+          overflow: hidden;
+          animation: eyesTrackShadow 1.5s ease-in-out infinite alternate;
+        }
+        .left {
+          left: calc(50% - 35px);
+        }
+        .right {
+          left: calc(50% + 6px);
+        }
+
+        .eyeWatch {
+          width: 7px;
+          height: 20px;
+          background-color: #000;
+          border-radius: 50%;
+          margin-top: 8px;
+          margin-left: 20px;
+          transform: rotate(25deg);
+          animation: trackIt 1.5s ease-in-out infinite alternate;
+          overflow: hidden;
+        }
+
+        .glare {
+          width: 5px;
+          height: 5px;
+          background-color: #fff;
+          border-radius: 50%;
+          position: relative;
+          top: 3px;
+          animation: light 1.5s ease-in-out infinite alternate;
+        }
+
+        .eyelids {
+          width: 90px;
+          height: 1px;
+          position: absolute;
+          z-index: 1;
+          top: 35px;
+          left: calc(50% - 45px);
+          background-color: #000;
+          animation: blink 6s ease-in-out infinite alternate;
+        }
+
+        .nose {
+          width: 14px;
+          height: 5px;
+          background-color: pink;
+          position: absolute;
+          top: 70px;
+          border-radius: 50% 50% 0 0;
+          left: calc(50% - 7px);
+        }
+
+        .claws {
+          width: 3px;
+          height: 10px;
+          position: absolute;
+          background-color: #fff;
+          border-radius: 50%;
+          box-shadow: 0 1px 2px #000;
+        }
+
+        .c1 {
+          top: 78px;
+          left: 25px;
+          transform: rotatez(25deg);
+        }
+        .c2 {
+          top: 83px;
+          left: 41px;
+        }
+        .c3 {
+          top: 78px;
+          left: 56px;
+          transform: rotatez(-25deg);
+        }
+        .c4 {
+          top: 78px;
+          right: 25px;
+          transform: rotatez(-25deg);
+        }
+        .c5 {
+          top: 83px;
+          right: 41px;
+        }
+        .c6 {
+          top: 78px;
+          right: 56px;
+          transform: rotatez(25deg);
+        }
+
+        .ballContainer {
+          width: 100%;
+          margin-top: 140px;
+        }
+
+        .ball {
+          width: 20px;
+          height: 20px;
+          background-color: red;
+          box-shadow: 1px -1px 3px #000 inset;
+          border-radius: 50%;
+          position: absolute;
+          animation: ballLight 1.5s ease-in-out infinite alternate;
+        }
+
+        .ballShadow {
+          width: 20px;
+          height: 15px;
+          background-color: #000;
+          margin-left: calc(50% + 90px);
+          border-radius: 50%;
+          position: absolute;
+          box-shadow: 0 0 5px 2px #fff inset;
+          animation: ballRolling 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes trackIt {
+          from {
+            margin-left: 21px;
+            transform: rotate(25deg);
+          }
+          to {
+            margin-left: 0px;
+            transform: rotate(-25deg);
+          }
+        }
+        @keyframes eyesTrackShadow {
+          from {
+            box-shadow: 5px 5px 6px #0f2 inset;
+          }
+          to {
+            box-shadow: -5px 5px 6px #0f2 inset;
+          }
+        }
+
+        @keyframes light {
+          0% {
+            transform: translateX(-2px);
+            opacity: 3;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(4px);
+            opacity: 3;
+          }
+        }
+
+        @keyframes blink {
+          0% {
+            height: 1px;
+          }
+          3% {
+            height: 35px;
+          }
+          4% {
+            height: 1px;
+          }
+          100% {
+            height: 1px;
+          }
+        }
+
+        @keyframes ballRolling {
+          0% {
+            margin-left: calc(50% + 90px);
+          }
+          100% {
+            margin-left: calc(50% - 90px);
+          }
+        }
+
+        @keyframes ballLight {
+          0% {
+            box-shadow: -1px -1px 3px #000 inset;
+            margin: -10px 0 0 -3px;
+          }
+          100% {
+            box-shadow: 1px -1px 3px #000 inset;
+            margin: -10px 0 0 3px;
+          }
+        }
+      </style>
+
+      <div class="wrapper">
+        <div class="cat">
+          <img src="./images/cc.png" />
+          <div class="eyelids"></div>
+          <div class="eye left">
+            <div class="eyeWatch">
+              <div class="glare"></div>
+            </div>
+          </div>
+          <div class="eye right">
+            <div class="eyeWatch">
+              <div class="glare"></div>
+            </div>
+          </div>
+          <div class="nose"></div>
+          <div class="claws c1"></div>
+          <div class="claws c2"></div>
+          <div class="claws c3"></div>
+          <div class="claws c4"></div>
+          <div class="claws c5"></div>
+          <div class="claws c6"></div>
+        </div>
+        <div class="ballContainer">
+          <div class="ballShadow">
+            <div class="ball"></div>
+          </div>
+        </div>
+        <div class="ears">
+          <div class="ear eLeft"></div>
+          <div class="ear eRight"></div>
+        </div>
+      </div>
+    </template>
+
+    <script>
+      class CatElement extends HTMLElement {
+        constructor() {
+          super();
+          const template = document.getElementById("cat-template");
+          const templateContent = template.content;
+          console.log(templateContent, "templateContent");
+          const shadowRoot = this.attachShadow({ mode: "open" });
+          shadowRoot.appendChild(templateContent.cloneNode(true));
+        }
+      }
+
+      customElements.define("cat-demo", CatElement);
+    </script>
+  </body>
+</html>
